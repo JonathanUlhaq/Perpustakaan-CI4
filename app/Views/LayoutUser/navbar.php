@@ -91,28 +91,38 @@
                         </a>
 
                     <?php } else { ?>
-                        <a href="#" class="dropdown-item">
+
+
+                        <div class="list-group">
                             <?php foreach ($keranjang as $b) : ?>
-                                <div class="thumb-content">
-                                    <!-- <div class="price">$200</div> -->
-                                    <a href="#">
-                                        <img style="height:18vw" class="card-img-top img-fluid" src="<?= base_url(); ?>/cover/<?= $b['options']['cover']; ?>" alt="<?= $b['name']; ?>">
-                                    </a>
-                                </div>
-                                <div class="card-body">
-                                    <p class="card-title">Judul :<?= $b['name']; ?></p>
-                                    <p class="card-title">Jumlah : <?= $b['qty']; ?></p>
-                                </div>
+                                <!-- <div class="price">$200</div> -->
+                                <a href="#" style="display: flex;" class="list-group-item list-group-item-action">
+                                    <img style="width:50%" src="<?= base_url(); ?>/cover/<?= $b['options']['cover']; ?>" alt="<?= $b['name']; ?>">
+
+                                    <span style="padding-left: 5px; font-size: small;"><strong><?= $b['name']; ?></strong><br> Qty: <?= $b['qty']; ?>
+                                    </span>
+
+                                </a>
+
                             <?php endforeach ?>
-                            <style>
-                                .dropdown-item:hover {
-                                    background-color: #a7a7a8;
-                                }
-                            </style>
-                            <a href="/User/cart" class="dropdown-item">
-                                <h6>Lihat Keranjang Buku</h6>
-                            </a>
+                            <!-- <a href="#">
+                                    >
+                                </a> -->
+                        </div>
+                        <!-- <div class="card-body">
+                                <p class="card-title">Judul :<?= $b['name']; ?></p>
+                                <p class="card-title">Jumlah : </p>
+                            </div> -->
+
+                        <style>
+                            .dropdown-item:hover {
+                                background-color: #a7a7a8;
+                            }
+                        </style>
+                        <a href="/User/cart" class="dropdown-item">
+                            <h6>Lihat Keranjang Buku</h6>
                         </a>
+
                     <?php } ?>
 
                     </a>

@@ -45,7 +45,7 @@
                                         <th scope="row"><input style="width: 100px;" type="number" class="form-control" name="qty<?= $i++; ?>" value="<?= $c['qty']; ?>"></th>
                                         <td> <img style="height:10vw;width: 8vw;" class="card-img-top img-fluid" src="<?= base_url(); ?>/cover/<?= $c['options']['cover']; ?>" alt="<?= $c['name']; ?>"></td>
                                         <td><?= $c['name']; ?></td>
-                                        <td><a href="/User/delete/<?= $c['rowid']; ?>"><i class='fas fa-trash' style='font-size:24px;color:red'></i></a></td>
+                                        <td><a onclick="return confirm('Apakah anda yakin ?')" href="/User/delete/<?= $c['rowid']; ?>"><i class='fas fa-trash' style='font-size:24px;color:red'></i></a></td>
                                     </tr>
                                 <?php endforeach ?>
 

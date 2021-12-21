@@ -49,7 +49,7 @@
             <div class="col-md-12">
 
                 <div class="section-title">
-                    <h2>Buku Trending</h2>
+                    <h2>Daftar Buku Perpustakaan</h2>
                     <p>Perpustakaan Online satu-satunya di Indoensia</p>
                 </div>
             </div>
