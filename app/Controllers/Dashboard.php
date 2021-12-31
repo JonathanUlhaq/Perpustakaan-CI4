@@ -21,10 +21,11 @@ class Dashboard extends BaseController
 
     public function index()
     {
+        $id = "";
         $data = [
             'judul' => 'Dashboard',
             'aktif' => 'dashboard',
-            'peminjam' => $this->dataPinjam->getWheres(),
+            'peminjam' => $this->dataPinjam->getWheres($id),
             'jumlah' => $this->dataBuku->countAll(),
             'jumeslah' => $this->dataPinjam->countAll(),
             'jumeslahs' => $this->dataPinjam->where(['setatus' => "Belum kembali"])->countAllResults(),
@@ -33,6 +34,17 @@ class Dashboard extends BaseController
         return view('Dashboard/index', $data);
     }
 
+    public function care()
+    {
+        $id = $_GET['keyword'];
+        $data = [
+            'judul' => 'Genre',
+            'aktif' => 'genre',
+            'validation' => \Config\Services::validation(),
+            'peminjam' => $this->dataPinjam->getWheres($id),
+        ];
+        return view('Dashboard/carindex', $data);
+    }
     public function detailAng($id)
     {
         $data = [
@@ -111,25 +123,64 @@ class Dashboard extends BaseController
 
     public function anggota()
     {
+        $id = $this->request->getVar('keyword');
         $data = [
             'judul' => 'Daftar Anggota',
             'aktif' => 'anggota',
-            'anggota' => $this->dataAnggota->findAll()
+            'anggota' => $this->dataAnggota->getAnggota($id)
 
         ];
         return view('Dashboard/anggota', $data);
     }
 
+    public function aanggota()
+    {
+        $id = $_GET['keyword'];
+        $data = [
+            'judul' => 'Daftar Anggota',
+            'aktif' => 'anggota',
+            'anggota' => $this->dataAnggota->getAnggota($id)
 
-    public function riwayat()
+        ];
+        return view('Dashboard/aanggota', $data);
+    }
+
+    public function detailRiw($id, $idp)
     {
         $data = [
             'judul' => 'Riwayat Peminjaman',
             'aktif' => 'riwayat',
-            'peminjam' => $this->dataPinjam->getData(),
+            'peminjam' => $this->dataPinjam->riwayatDetail($id, $idp)
+
+        ];
+        return view('Dashboard/riwayatdetail', $data);
+    }
+
+
+    public function riwayat()
+    {
+        $_GET['keyword'] = "";
+        $id = $_GET['keyword'];
+        $data = [
+            'judul' => 'Riwayat Peminjaman',
+            'aktif' => 'riwayat',
+            'peminjam' => $this->dataPinjam->Riwayat($id),
         ];
         return view('Dashboard/riwayat', $data);
     }
+
+    public function riwayats()
+    {
+
+        $id = $_GET['keyword'];
+        $data = [
+            'judul' => 'Riwayat Peminjaman',
+            'aktif' => 'riwayat',
+            'peminjam' => $this->dataPinjam->Riwayat($id),
+        ];
+        return view('Dashboard/riwayats', $data);
+    }
+
     public function detail($id)
     {
         $data = [
@@ -142,15 +193,31 @@ class Dashboard extends BaseController
 
     public function table()
     {
+        $id = $this->request->getVar('keyword');
         $data = [
             'judul' => 'Tables',
             'validation' => \Config\Services::validation(),
             'aktif' => 'tabel',
             'genre' => $this->dataGenre->getData(),
-            'buku' => $this->dataBuku->getData()
+            'buku' => $this->dataBuku->getDatas($id)
         ];
         return view('Dashboard/table', $data);
     }
+
+    public function table2()
+    {
+        $id = $this->request->getVar('keyword');
+        $data = [
+            'judul' => 'Tables',
+            'validation' => \Config\Services::validation(),
+            'aktif' => 'tabel',
+            'genre' => $this->dataGenre->getData(),
+            'buku' => $this->dataBuku->getDatas($id)
+        ];
+        return view('Dashboard/tabble', $data);
+    }
+
+
 
     public function tambah()
     {
@@ -194,7 +261,7 @@ class Dashboard extends BaseController
         ])) {
             $validation = \Config\Services::validation();
             session()->setFlashdata('errors', $this->validator->listErrors());
-            return redirect()->to('/table')->withInput()->with('validation', $validation);
+            return redirect()->to(base_url() . '/table')->withInput()->with('validation', $validation);
         }
 
         $cover = $this->request->getFile('cover');
@@ -312,13 +379,13 @@ class Dashboard extends BaseController
         return redirect()->to(base_url() . '/anggota');
     }
 
-    public function kembali($id)
+    public function kembali($id, $id_buku)
     {
         $data = [
             'setatus' => "Sudah Kembali"
         ];
 
-        $this->dataPinjam->update($id, $data);
+        $this->dataPinjam->where(['id_buku' => $id_buku])->update($id, $data);
 
         session()->setFlashdata('yu', 'Data berhasil diubah');
         return redirect()->to(base_url() . '/');

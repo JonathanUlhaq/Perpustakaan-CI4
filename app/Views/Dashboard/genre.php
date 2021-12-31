@@ -18,6 +18,15 @@
                             margin: 1vw;
                         }
 
+                        #detail:hover {
+                            color: #043d42;
+                            transition: 1s;
+                        }
+
+                        #detail {
+                            color: #068690;
+                        }
+
                         #edit:hover {
                             color: #043d42;
                             transition: 1s;
@@ -37,25 +46,36 @@
                         }
 
                         input[type=text]:focus {
-                            background-color: #f4f4f4;
-
+                            border: 2px solid #d63670;
+                            border-radius: 15px;
+                            background-color: #f0f5f1;
                             transition: 1.5s;
                         }
 
                         input[type=text]:hover {
-                            background-color: #f8f8f8;
+                            border: 2px solid #d63670;
+                            border-radius: 15px;
 
                             transition: 1.5s;
                         }
 
                         input[type=number]:focus {
-                            background-color: #f4f4f4;
+                            border: 2px solid #d63670;
+                            border-radius: 15px;
 
                             transition: 1.5s;
                         }
 
                         input[type=number]:hover {
-                            background-color: #f8f8f8;
+                            border: 2px solid #d63670;
+                            border-radius: 15px;
+
+                            transition: 1.5s;
+                        }
+
+                        input[type=text] {
+                            border: 2px solid #eb4d87;
+                            border-radius: 15px;
 
                             transition: 1.5s;
                         }
@@ -176,10 +196,19 @@
                         </div>
                     <?php endif; ?>
 
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                        Tambah Genre <i style="padding-left: 5px;" class="fas fa-plus"></i>
-                    </button>
+                    <div style="display: flex;" class="flelex">
+
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            Tambah Genre <i style="padding-left: 5px;" class="fas fa-plus"></i>
+                        </button>
+
+                        <div style="margin-top: 1vw;margin-left: 45vw;" class="col-3">
+
+                            <input type="text" style="padding-left: 1vw;" class="form-control" id="keyword" name="keyword" placeholder=" Cari Genre ......">
+
+                        </div>
+                    </div>
 
                     <!-- Modal -->
                     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -229,7 +258,7 @@
                             <th class="text-secondary opacity-7"></th>
                         </tr>
                     </thead>
-                    <tbody class="text-center">
+                    <tbody id="result" class="text-center">
                         <?php foreach ($gener as $b) : ?>
                             <tr>
 
@@ -263,7 +292,22 @@
         </div>
     </div>
 
+    <script>
+        var keyword = document.getElementById('keyword')
+        var result = document.getElementById('result')
 
+        keyword.addEventListener('keyup', function() {
+            var xhr = XMLHttpRequest()
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    result.innerHTML = xhr.responseText;
+                }
+            }
+            xhr.open('GET', '/Genre/cari?keyword=' + keyword.value, true)
+            xhr.send()
+        })
+    </script>
 
     <?= $this->endSection(); ?>
 <?php } ?>

@@ -15,8 +15,25 @@ class DataBuku extends Model
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
 
-    public function getData()
+    public function getData($keyword = "")
     {
-        return $this->db->table('data_buku')->join('genre', 'data_buku.genre=genre.id_genre')->get()->getResultArray();
+        if ($keyword == "") {
+            return $this->db->table('data_buku')->join('genre', 'data_buku.genre=genre.id_genre')->get()->getResultArray();
+        } else {
+            return $this->db->table('data_buku')->join('genre', 'data_buku.genre=genre.id_genre')->like('judul', $keyword)
+                ->orLike('genre', $keyword)
+                ->orLike('pengarang', $keyword)
+                ->orLike('penerbit', $keyword)->get()->getResultArray();
+        }
+    }
+
+    public function getDatas($keyword = "")
+    {
+        if ($keyword == "") {
+            return $this->db->table('data_buku')->join('genre', 'data_buku.genre=genre.id_genre')->get()->getResultArray();
+        } else {
+            return $this->db->table('data_buku')->join('genre', 'data_buku.genre=genre.id_genre')->like('judul', $keyword)
+                ->orLike('id_buku', $keyword)->orLike('genre.id_genre', $keyword)->get()->getResultArray();
+        }
     }
 }

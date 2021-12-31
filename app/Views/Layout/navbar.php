@@ -28,7 +28,7 @@
                         nav-link text-white
                         <?php } ?>" href="/tabel">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-book-reader opacity-10"></i>
+                        <i class="material-icons opacity-10">book</i>
                     </div>
                     <span class="nav-link-text ms-1">Data Buku</span>
                 </a>
@@ -40,7 +40,7 @@
                         nav-link text-white
                         <?php } ?>" href="/genre">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-digital-tachograph  opacity-10"></i>
+                        <i class="material-icons opacity-10">list</i>
                     </div>
                     <span class="nav-link-text ms-1">Data Genre</span>
                 </a>
@@ -52,7 +52,7 @@
                         nav-link text-white
                         <?php } ?>" href="/riwayat">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fa fa-history opacity-10" aria-hidden="true"></i>
+                        <i class="material-icons opacity-10">timer</i>
                     </div>
                     <span class="nav-link-text ms-1">Riwayat Peminjaman</span>
                 </a>
@@ -64,7 +64,7 @@
                         nav-link text-white
                         <?php } ?>" href="/anggota">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-id-card opacity-10"></i>
+                        <i class="material-icons opacity-10">person</i>
                     </div>
                     <span class="nav-link-text ms-1">Daftar Anggota</span>
                 </a>

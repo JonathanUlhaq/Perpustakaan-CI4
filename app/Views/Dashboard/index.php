@@ -1,7 +1,48 @@
 <?php if (in_groups('petugas') || in_groups('admin')) { ?>
     <?= $this->extend('Layout/layout'); ?>
     <?= $this->section('konten'); ?>
+    <style>
+        input[type=text]:focus {
+            border: 2px solid #d63670;
+            border-radius: 15px;
+            background-color: #f0f5f1;
+            transition: 1.5s;
+        }
 
+        input[type=text]:hover {
+            border: 2px solid #d63670;
+            border-radius: 15px;
+
+            transition: 1.5s;
+        }
+
+
+
+        input[type=text] {
+            border: 2px solid #eb4d87;
+            border-radius: 15px;
+
+            transition: 1.5s;
+        }
+
+
+
+
+
+
+
+        input:focus {
+            background-color: #f4f4f4;
+
+            transition: 1.5s;
+        }
+
+        input:hover {
+            background-color: #f8f8f8;
+
+            transition: 1.5s;
+        }
+    </style>
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
@@ -85,7 +126,11 @@
                                     </div>
                                 </div>
                             <?php endif; ?>
+                            <!-- <div style="margin-top: 1vw;margin-left: 2vw;" class="col-3">
 
+                                <input type="text" style="padding-left: 1vw;" class="form-control" id="keyword" name="keyword" placeholder=" Cari Genre ......">
+
+                            </div> -->
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0 text-center">
 
@@ -100,7 +145,7 @@
 
                                         </tr>
                                     </thead>
-                                    <tbody class="text-center">
+                                    <tbody id="result" class="text-center">
                                         <?php foreach ($peminjam as $p) : ?>
 
                                             <tr>
@@ -126,7 +171,7 @@
 
 
                                                 <td class="align-middle">
-                                                    <a href="/Dashboard/kembali/<?= $p['id_peminjaman']; ?>" id="detail" class=" btn btn-primary" data-toggle="tooltip" data-original-title="Edit user">
+                                                    <a href="/Dashboard/kembali/<?= $p['id_peminjaman']; ?>/<?= $p['id_buku']; ?>" id="detail" class=" btn btn-primary" data-toggle="tooltip" data-original-title="Edit user">
                                                         Kembali <i style="margin-left: 0.5vw;" class="fas fa-undo-alt"></i>
                                                 </td>
                                             </tr>
@@ -399,7 +444,24 @@
     </body>
 
     </html>
+    <!-- <script>
+        var keyword = document.getElementById('keyword')
+        var result = document.getElementById('result')
 
+        keyword.addEventListener('keyup', function() {
+            var ajax = XMLHttpRequest()
+
+
+            ajax.onreadystatechange = function() {
+                if (ajax.readyState == 4 && ajax.status == 200) {
+                    result.innerHTML = ajax.responseText
+                }
+            }
+
+            ajax.open('GET', '/Dashboard/care?keyword=' + keyword.value, true)
+            ajax.send()
+        })
+    </script> -->
     <?= $this->endSection(); ?>
 <?php } else {
     header("Location:/forms");

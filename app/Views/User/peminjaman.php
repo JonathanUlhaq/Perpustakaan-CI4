@@ -12,7 +12,7 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col">Qty</th>
+                                    <th scope="col">No</th>
                                     <th scope="col">Cover</th>
                                     <th scope="col">Judul Buku</th>
                                     <th scope="col">Jumlah Buku</th>

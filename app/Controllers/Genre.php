@@ -14,13 +14,27 @@ class Genre extends BaseController
     }
     public function index()
     {
+        $id = $this->request->getVar('keyword');
         $data = [
             'judul' => 'Genre',
             'aktif' => 'genre',
             'validation' => \Config\Services::validation(),
-            'gener' => $this->dataGenre->getData()
+            'gener' => $this->dataGenre->getData($id)
         ];
         return view('Dashboard/genre', $data);
+    }
+
+
+    public function cari()
+    {
+        $id = $_GET['keyword'];
+        $data = [
+            'judul' => 'Genre',
+            'aktif' => 'genre',
+            'validation' => \Config\Services::validation(),
+            'gener' => $this->dataGenre->getData($id)
+        ];
+        return view('Dashboard/genree', $data);
     }
 
     public function simpan()

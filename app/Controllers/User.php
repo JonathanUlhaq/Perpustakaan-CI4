@@ -24,15 +24,31 @@ class User extends BaseController
     }
     public function index()
     {
+        $id = $this->request->getVar('keyword');
         $data = [
             'judul' => 'E-Perpustakaan',
-            'buku' => $this->dataBuku->getData(),
+            'buku' => $this->dataBuku->getData($id),
             'validation' => \Config\Services::validation(),
             'cart' => \Config\Services::cart(),
             'setatus' => 'home',
             'nama' => $this->dataUser->where(['id' => user_id()])->first()
         ];
         return view('User/index', $data);
+    }
+
+    public function carios()
+    {
+        $id = $_GET['keyword'];
+        $data = [
+            'judul' => 'E-Perpustakaan',
+            'ide' => $_GET['keyword'],
+            'buku' => $this->dataBuku->getDatas($id),
+            'validation' => \Config\Services::validation(),
+            'cart' => \Config\Services::cart(),
+            'setatus' => 'home',
+            'nama' => $this->dataUser->where(['id' => user_id()])->first()
+        ];
+        return view('User/carioso', $data);
     }
 
     public function peminjaman()
@@ -214,9 +230,10 @@ class User extends BaseController
 
         $nama = $this->dataAnggota->where(['id_akun' => user_id()])->first();
         date_default_timezone_set("Asia/Jakarta");
+        $rand = rand(100, 10000);
+        $id = "PM_$rand";
         foreach ($cart->contents() as $c) {
-            $rand = rand(100, 10000);
-            $id = "PM_$rand";
+
             $data2 = date("d-m-Y");
             $data = [
                 'id_peminjaman' => $id,

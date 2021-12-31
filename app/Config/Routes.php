@@ -44,6 +44,7 @@ $routes->get('/anggota', 'Dashboard::anggota');
 $routes->get('/genre', 'Genre::index');
 $routes->get('/edit/(:any)', 'Dashboard::edit/$1');
 $routes->get('/detail/(:any)', 'Dashboard::detail/$1');
+$routes->get('/detailRiw/(:any)', 'Dashboard::detailRiw/$1');
 $routes->get('/delete/(:any)', 'Dashboard::delete/$1');
 
 

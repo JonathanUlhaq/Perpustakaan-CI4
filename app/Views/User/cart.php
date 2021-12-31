@@ -26,7 +26,7 @@
                     <div class="section-title">
                         <h2>Lihat Keranjang Buku</h2>
                     </div>
-                    <form action="/User/update" method="POST">
+                    <form action="/User/checkout" method="POST">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
@@ -36,62 +36,15 @@
                                     <th scope="col">Delete</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <?php $jum = 0;
-                                $i = 1;
-                                foreach ($cart->contents() as $c) :
-                                    $jum = $jum + $c['qty']; ?>
-                                    <tr>
-                                        <th scope="row"><input style="width: 100px;" type="number" class="form-control" name="qty<?= $i++; ?>" value="<?= $c['qty']; ?>"></th>
-                                        <td> <img style="height:10vw;width: 8vw;" class="card-img-top img-fluid" src="<?= base_url(); ?>/cover/<?= $c['options']['cover']; ?>" alt="<?= $c['name']; ?>"></td>
-                                        <td><?= $c['name']; ?></td>
-                                        <td><a onclick="return confirm('Apakah anda yakin ?')" href="/User/delete/<?= $c['rowid']; ?>"><i class='fas fa-trash' style='font-size:24px;color:red'></i></a></td>
-                                    </tr>
-                                <?php endforeach ?>
+                            <style>
+                                .mantol:hover {
+                                    color: darkred;
+                                }
 
-                            </tbody>
-                        </table>
-
-                        <div style="margin-top: 3vw;margin-left: 30vw;" class="col-6">
-                            <table class="table table-hover">
-                                <tr>
-                                    <td> <strong>Jumlah Buku :</strong> <?= $jum; ?></td>
-
-                                </tr>
-
-
-
-                            </table>
-                        </div>
-
-                        <div style="display: flex;" class="buton">
-                            <a style="margin-right: 10px;" href="#checkout" class="btn btn-primary" type="submit">Checkout</a>
-                            <button class="btn btn-success" type="submit">Update</button>
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="checkout" class="popular-deals section bg-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="section-title">
-                        <h2>Checkout Buku</h2>
-                    </div>
-                    <form action="/User/checkout" method="POST">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Qty</th>
-                                    <th scope="col">Cover</th>
-                                    <th scope="col">Judul Buku</th>
-
-                                </tr>
-                            </thead>
+                                .mantol {
+                                    color: red;
+                                }
+                            </style>
                             <tbody>
                                 <?php $jum = 0;
                                 $i = 1;
@@ -101,7 +54,7 @@
                                         <th scope="row"><?= $c['qty']; ?></th>
                                         <td> <img style="height:10vw;width: 8vw;" class="card-img-top img-fluid" src="<?= base_url(); ?>/cover/<?= $c['options']['cover']; ?>" alt="<?= $c['name']; ?>"></td>
                                         <td><?= $c['name']; ?></td>
-
+                                        <td><a class="mantol" onclick="return confirm('Apakah anda yakin ?')" href="/User/delete/<?= $c['rowid']; ?>">Delete</a></td>
                                     </tr>
                                 <?php endforeach ?>
 
@@ -122,7 +75,6 @@
 
                         <div style="display: flex;" class="buton">
                             <button style="margin-right: 10px;" class="btn btn-primary text-white" type="submit">Checkout</button>
-                            <a class="btn btn-success" href="#update" type="submit">Update</a>
 
                         </div>
 
@@ -131,6 +83,8 @@
             </div>
         </div>
     </section>
+
+
 <?php } else { ?>
     <section class="popular-deals section bg-gray">
         <div class="container">

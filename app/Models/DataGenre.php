@@ -10,8 +10,14 @@ class DataGenre extends Model
     protected $primaryKey = 'id_genre';
     protected $allowedFields = ['id_genre', 'nama_genre'];
 
-    public function getData()
+    public function getData($id = "")
     {
-        return $this->db->table('genre')->get()->getResultArray();
+        if ($id == "") {
+            return $this->db->table('genre')->get()->getResultArray();
+        } else {
+            return $this->db->table('genre')->like('nama_genre', $id)
+                ->orLike('id_genre', $id)
+                ->get()->getResultArray();
+        }
     }
 }

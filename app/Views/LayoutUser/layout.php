@@ -2,6 +2,12 @@
     html {
         scroll-behavior: smooth;
     }
+
+    body {
+        animation: fadeInAnimation ease 3s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+    }
 </style>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,6 +29,7 @@
     <link rel="stylesheet" href="<?= base_url(); ?>/users/plugins/bootstrap/css/bootstrap-slider.css">
     <!-- Font Awesome -->
     <link href="<?= base_url(); ?>/users/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/ff677759a9.js" crossorigin="anonymous"></script>
     <!-- Owl Carousel -->
     <link href="<?= base_url(); ?>/users/plugins/slick-carousel/slick/slick.css" rel="stylesheet">
     <link href="<?= base_url(); ?>/users/plugins/slick-carousel/slick/slick-theme.css" rel="stylesheet">
